@@ -41,7 +41,7 @@ namespace :myec2  do
     task :install, :roles => :ec2_servers do
       case server_release
       when "redhat_5"
-        run "#{sudo :as => 'root'} rpm -ivh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm"
+        run "#{sudo :as => 'root'} rpm -Uv http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm || true"
         run "#{sudo :as => 'root'} yum install -y --nogpgcheck bash curl git gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel make bzip2 iconv-devel"
       when "ubuntu"
         run "#{sudo :as => 'root'} apt-get update -y"
