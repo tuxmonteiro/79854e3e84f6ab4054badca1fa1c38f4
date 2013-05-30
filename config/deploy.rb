@@ -1,6 +1,6 @@
 #require "capify-ec2/capistrano"
 
-my_aws_key = "" # ~/.ssh/xxxxx.pem
+set :my_aws_key, ENV['AWS_KEY'] # ~/.ssh/xxxxx.pem
 puppet_cmd = "source /usr/local/rvm/environments/ruby-1.9.3-p429@puppet && test -f /usr/local/rvm/gems/ruby-1.9.3-p429@puppet/bin/puppet && /usr/local/rvm/gems/ruby-1.9.3-p429@puppet/bin/puppet"
 facter_cmd = "source /usr/local/rvm/environments/ruby-1.9.3-p429@puppet && test -f /usr/local/rvm/gems/ruby-1.9.3-p429@puppet/bin/facter && /usr/local/rvm/gems/ruby-1.9.3-p429@puppet/bin/facter"
 gem_cmd = "/usr/local/rvm/wrappers/ruby-1.9.3-p429@puppet/gem"
@@ -10,7 +10,7 @@ ec2_user = server_release == "ubuntu" ? "ubuntu" : "root"
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "#{my_aws_key}")]
 
 set :user, ec2_user
-role :ec2_servers, "" 
+role :ec2_servers, ENV['EC2_SERVERS']
 
 namespace :myec2  do
   desc "Get local hostname"
